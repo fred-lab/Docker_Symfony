@@ -10,6 +10,7 @@ Lightweight dev environment for Symfony 4 with Docker.
 - Clone this repo at the racine of the Symfony's project
 - Rename **docker-compose.yml.dist** to **docker-compose.yml**
 - Run ```docker-compose up -d```
+- Go to "localhost" in a web browser
 - Enjoy
 
 ## Annex
