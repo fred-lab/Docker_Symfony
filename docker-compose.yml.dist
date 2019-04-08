@@ -20,17 +20,15 @@ services:
       - ./docker/engine/php.ini:/usr/local/etc/php/conf.d/custom.ini:ro
     depends_on:
       - database
-  
+
   database:
-    build: ./docker/database/
+    image: nimmis/alpine-mariadb
     environment:
       - MYSQL_ROOT_PASSWORD=root
-      - MYSQL_DATABASE=toto
-      - MYSQL_USER=toto
+      - MYSQL_DATABASE=database
+      - MYSQL_USER=user
       - MYSQL_PASSWORD=pwd
       # Allow empty password for the root user
       # - MYSQL_ALLOW_EMPTY_PASSWORD=yes
     ports:
       - 3306:3306
-    # volumes:
-    #   - ./docker/database/db:/var/lib/mysql
