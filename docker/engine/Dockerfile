@@ -3,7 +3,7 @@ FROM php:7.3.1-fpm-alpine
 LABEL maintainer="Fred Gauthier <fred.gauthier.dev@gmail.com>" \
     Description="A lightweigth PHP 7.3.1 container for Symfony with Xdebug and Composer, build with Alpine"
 
-ARG PHP_XDEBUG_VERSION=2.7.0beta1
+ARG PHP_XDEBUG_VERSION=2.7.1
 
 WORKDIR /home/docker
 

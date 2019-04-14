@@ -2,3 +2,5 @@
 \.idea/
 
 docker-compose.yml
+
+package\.json
