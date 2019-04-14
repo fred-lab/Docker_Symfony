@@ -9,10 +9,57 @@ Lightweight dev environment for Symfony 4 with Docker.
 ## How to use
 - Clone this repo at the racine of the Symfony's project
 - Rename **docker-compose.yml.dist** to **docker-compose.yml**
-- Update **docker-compose.yml** with your information (port, database id....)
+- Update **docker-compose.yml** with your information (port, database id....) Comment useless service or uncomment the one you need  
+- For the **build** container (nodejs), you must have a valid **package.json** file.  
+In docker-compose.yml **build** section , for **command**, replace the npm command with a command to build the assets (npm run dev, npm run prod, npm run watch...)
 - Run ```docker-compose up -d```
-- Go to "localhost" in a web browser
+- Go to **"localhost:80"** in a web browser (replace the port with the nginx port you set)
 - Enjoy
+
+## How to use Composer or Symfony console
+You must log into the **Engine** container :  
+```docker-compose exec engine sh```  
+Inside the container, you can use **Composer** or **Symfony console** commands  
+
+## How to use NPM
+You must log into the **Build** container :  
+```docker-compose exec build sh```  
+Inside the container, you can use **npm** or **node** commands  
+
+## How to access to the database
+You must log into the **Database** container :  
+```docker-compose exec database sh```  
+Inside the container, you can log to the databse (with the user information from the docker-compose.yml:
+```mysql -uuser -p```  
+
+### Symfony
+To connect Symfony to the database, you must have an ORM installed and you must update the **.env** file  
+
+In the ORM section, you must update this url :
+**DATABASE_URL=mysql://db_user:db_password@database:3306/db_name**
+
+Replace from the docker-compose.yml:
+- **db_user** with the MYSQL_USER value
+- **db_password** with the MYSQL_PASSWORD value
+- **db_name** with the MYSQL_DATABASE value
+
+It should look like this with the default docker-compose.yml file :
+**DATABASE_URL=mysql://user:pwd@database:3306/database**
+
+### PHPstorm
+Go to **database**, in **Data Source**, Select **MariaDB**
+In **Port**, indicate the port of the **database** service from the host (not the container : -**3307**:3306 **3307** is the host port)
+In **User**,indicate the username  
+In **Password**,indicate the password  
+In **Database**,indicate the database name  
+
+Click on **Check connection** to test and save with **Ok**.
+
+## Maildev
+MailDev allow to test your projects' emails during development
+If you use **SwiftMailer** with **Symfony**, in the **.env** file, replace the **Mailer_URL** with :  
+**MAILER_URL=smtp://maildev:25**  
+
 
 ## Annex
 ### Usefull command

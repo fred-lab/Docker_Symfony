@@ -1,6 +1,7 @@
 version: '3'
 
 services:
+#  Log into this container with : docker-compose exec front sh
   front:
     image: nginx:mainline-alpine
     ports:
@@ -10,7 +11,8 @@ services:
       - ./docker/front/default.conf:/etc/nginx/conf.d/default.conf:ro
     depends_on:
       - engine
-    
+
+#  Log into this container with : docker-compose exec engine sh
   engine:
     build: ./docker/engine/
     ports:
@@ -21,6 +23,7 @@ services:
     depends_on:
       - database
 
+#  Log into this container with : docker-compose exec database sh
   database:
     image: nimmis/alpine-mariadb
     environment:
@@ -32,3 +35,24 @@ services:
       # - MYSQL_ALLOW_EMPTY_PASSWORD=yes
     ports:
       - 3306:3306
+
+# A package.json file is required with script command (npm run watch, npm run dev....)
+#  Log into this container with : docker-compose exec build sh
+  build:
+    image: node:lts-alpine
+    user: node
+    working_dir: /home/docker
+    expose:
+      - 3000
+    volumes:
+      - ./:/home/docker:rw
+    #    Insert the NPM run command, from the package.json, to execute at startup
+    command: "npm run test"
+
+## MailDev allow to test your projects' emails during development
+## Go to localhost:1080 to see the mail box
+#  maildev:
+#    image: djfarrelly/maildev
+#    ports:
+#      - 1080:80
+#      - 1025:25
