@@ -1,6 +1,14 @@
 # Docker Symfony
 
-Lightweight dev environment for Symfony 4 with Docker.
+Lightweight dev environment for Symfony 4 with Docker.  
+It provide :
+- **Nginx** - _15.3MB_
+- **PHP 7.3.1-fpm** - _123MB_
+- **MariaDB** - _151MB_
+- **NodeJS** (latest) - _67.9MB_
+- **Maildev** - _67.6MB_
+
+It use Alpine container to reduce the weight
 
 ## Requirement
 - Docker
