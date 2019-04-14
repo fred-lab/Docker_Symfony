@@ -55,8 +55,8 @@ It should look like this with the default docker-compose.yml file :
 **DATABASE_URL=mysql://user:pwd@database:3306/database**
 
 ### PHPstorm
-Go to **database**, in **Data Source**, Select **MariaDB**
-In **Port**, indicate the port of the **database** service from the host (not the container : -**3307**:3306 **3307** is the host port)
+Go to **database**, in **Data Source**, select **MariaDB**  
+In **Port**, indicate the port of the **database** service from the host (not the container : -**3307**:3306 -> **3307** is the host port)  
 In **User**,indicate the username  
 In **Password**,indicate the password  
 In **Database**,indicate the database name  
@@ -84,7 +84,7 @@ If you use **SwiftMailer** with **Symfony**, in the **.env** file, replace the *
 
 ```docker-compose exec service_name sh``` : Connect to a running container with a shell terminal. Usefull to  test the container
 
-```docker-compose run --rm service_name /bin/sh``` : Run a container and log into it with a shell terminal. This container is removed when it is stop. Usefull for debug
+```docker-compose run --rm service_name sh``` : Run a container and log into it with a shell terminal. This container is removed when it is stop. Usefull for debug
 
 ```docker images``` : Display all the image and their size
 
