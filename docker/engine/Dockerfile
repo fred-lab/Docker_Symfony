@@ -8,6 +8,11 @@ ARG PHP_XDEBUG_VERSION=2.7.1
 WORKDIR /home/docker
 
 RUN apk update \
+    # Install Compiler dependencies
+    && apk add --no-cache --virtual compiler-dependencies \
+        g++ \
+        autoconf \
+        make \
     # Install PHP extensions with dependencies
     && echo -e '\033[0;31m' Install PHP extensions with dependencies '\033[0m'\
     #
@@ -39,10 +44,6 @@ RUN apk update \
     #
     # Install Xdebug
     && echo -e '\033[0;31m' Install Xdebug '\033[0m' \
-    && apk add --no-cache --virtual xdebug-dependencies \
-        g++ \
-        autoconf \
-        make \
     && pecl install xdebug-$PHP_XDEBUG_VERSION \
     && docker-php-ext-enable xdebug \
     && docker-php-source delete \
@@ -61,8 +62,8 @@ RUN apk update \
     && apk del shadow \
     # Clean up apk cache folder and the virtuals folders
     && echo -e '\033[0;31m' Clean up apk cache folder and the virtuals folders '\033[0m' \
-    && apk del --purge xdebug-dependencies \
     && apk del --purge php-dependencies \
+    && apk del --purge compiler-dependencies \
     && rm -rf /var/cache/apk/*
 
 USER www-data

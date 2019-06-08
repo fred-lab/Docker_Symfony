@@ -4,7 +4,7 @@ Lightweight dev environment for Symfony 4 with Docker.
 It provide :
 - **Nginx** - _15.3MB_
 - **PHP 7.3.1-fpm** - _123MB_
-- **MariaDB** - _151MB_
+- **MariaDB** - _183MB_
 - **NodeJS** (latest) - _67.9MB_
 - **Maildev** - _67.6MB_
 
@@ -38,10 +38,22 @@ Inside the container, you can use **npm** or **node** commands
 You must log into the **Database** container :  
 ```docker-compose exec database sh```  
 Inside the container, you can log to the databse (with the user information from the docker-compose.yml:
-```mysql -uuser -p```  
+```mysql -uuser -p```    
+Outside the container, you can log to the databse (with the user information and the port on the host from the docker-compose.yml:
+```mysql -uuser -p --host=127.0.0.1 --port=3306```  
+Outside the container, you can export a database like this :
+```mysqldump -uuser -p --host=127.0.0.1 --port=3306 --databases database_name > /path/to/export/database_name.sql```  
+Outside the container, you can import a database like this :
+```mysql -uuser -p --host=127.0.0.1 --port=3306 < /path/to/import/database_name.sql```  
+
+_Note_ : the **root** user cannot access to the database container from outside, just from inside. The **root** user must have a password.
+
+#### Import scripts and databases when building the container
+You can automatically import scripts and databases when building the database container. Simply put the scripts and/or databases in the **/docker/database/initdb.d/** folder.
+Scripts extension must be *.sh and for databases *.sql or *.sql.gz .
 
 ### Symfony
-To connect Symfony to the database, you must have an ORM installed and you must update the **.env** file  
+To connect Symfony to the database, you must have an ORM (_Doctrine_) installed and you must update the **.env** file  
 
 In the ORM section, you must update this url :
 **DATABASE_URL=mysql://db_user:db_password@database:3306/db_name**
@@ -91,3 +103,5 @@ If you use **SwiftMailer** with **Symfony**, in the **.env** file, replace the *
 ```docker rmi $(docker images -q) -f ``` : Force to remove every  unused images. Usefull to optimize the size
 
 ```docker rm $(docker images -q) -f ``` : Force to remove every  unused containers. Usefull to optimize the size
+
+```docker system prune --volumes -f``` : Force to remove all stopped containers, all dangling images, and all unused networks, all volumes
