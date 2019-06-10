@@ -104,4 +104,6 @@ If you use **SwiftMailer** with **Symfony**, in the **.env** file, replace the *
 
 ```docker rm $(docker images -q) -f ``` : Force to remove every  unused containers. Usefull to optimize the size
 
-```docker system prune --volumes -f``` : Force to remove all stopped containers, all dangling images, and all unused networks, all volumes
+```docker system prune --volumes -f``` : Force to remove all stopped containers, all dangling images, and all unused networks, all volumes  
+
+```docker ps -q | xargs -n 1 docker inspect --format '{{ .Name }} {{range .NetworkSettings.Networks}} {{.IPAddress}}{{end}}' | sed 's#^/##';|``` : List all docker container name and their respective IPs.

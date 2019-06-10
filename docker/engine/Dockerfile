@@ -4,6 +4,8 @@ LABEL maintainer="Fred Gauthier <fred.gauthier.dev@gmail.com>" \
     Description="A lightweigth PHP 7.3.1 container for Symfony with Xdebug and Composer, build with Alpine"
 
 ARG PHP_XDEBUG_VERSION=2.7.1
+ARG HOST_USER
+ARG HOST_USERGROUP
 
 WORKDIR /home/docker
 
@@ -56,7 +58,7 @@ RUN apk update \
     # Change the user 1000 to www-data to avoid permissions issues
     && echo -e '\033[0;31m' Change user permissions '\033[0m' \
     && cd /home/docker \
-    && apk --no-cache add shadow && usermod -u 1000 www-data && groupmod -g 987 www-data \
+    && apk --no-cache add shadow && usermod -u $HOST_USER www-data && groupmod -g $HOST_USERGROUP www-data \
     && echo -e '\033[0;31m' Check Permissions for '\033[0m' $PWD \
     && ls -la \
     && apk del shadow \

@@ -7,3 +7,6 @@ package\.json
 
 /docker/database/initdb.d/*
 !/docker/database/initdb.d/.gitkeep
+node_modules
+
+\.vscode/

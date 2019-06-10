@@ -14,7 +14,13 @@ services:
 
 #  Log into this container with : docker-compose exec engine sh
   engine:
-    build: ./docker/engine/
+    build: . 
+      context: ./docker/engine/
+      args:
+      # Get the user id & group id of the owner of the project dir with "ls -la" and paste the result here. This will update the
+      # project dir permission inside the container
+      - HOST_USER=1000
+      - HOST_USERGROUP=987  
     ports:
       - 9000:9000
     volumes:
@@ -38,12 +44,14 @@ services:
 
 # A package.json file is required with script command (npm run watch, npm run dev....)
 #  Log into this container with : docker-compose exec build sh
-  build:
-    image: node:lts-alpine
-    user: node
-    working_dir: /home/docker
-    expose:
-      - 3000
+  build: 
+    build: 
+      context: ./docker/nodejs/
+      args:
+      # Get the user id & group id of the owner of the project dir with "ls -la" and paste the result here. This will update the
+      # project dir permission inside the container
+      - HOST_USER=1000
+      - HOST_USERGROUP=987 
     volumes:
       - ./:/home/docker:rw
     #    Insert the NPM run command, from the package.json, to execute at startup
