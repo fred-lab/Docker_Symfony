@@ -146,7 +146,19 @@ If you have installed **PHPUNit** without **PHPUnit Bridge**, check **Use Compos
 ![alt text](https://user-images.githubusercontent.com/23243372/62821196-69120d00-bb71-11e9-8ee6-d5920c15e6d5.png "Choose the path to phpunit.xmlm.dist")  
 
 Now, you should have something like this :  
-![alt text](https://user-images.githubusercontent.com/23243372/62821208-ad9da880-bb71-11e9-8bac-3552664c6146.png "PHP Unit configuration")
+![alt text](https://user-images.githubusercontent.com/23243372/62821208-ad9da880-bb71-11e9-8bac-3552664c6146.png "PHP Unit configuration")  
+
+Note : **/opt/project** is the root project for Docker volume. It's equivalent to **/home/docker**  
+
+#### Add a Test Runner  
+- Go to **Run -> Edit Configuration**, click on **+** and choose **PHPUnit**  
+ ![alt text](https://user-images.githubusercontent.com/23243372/62821342-9069d980-bb73-11e9-8bdc-a86a367dd9ea.png "PHP Unit Test Runner configuration")  
+
+Choose a **name** and check **Defined in the configuration file**.  
+
+#### Run the test  
+To run the test, choose your **Test runner** and click on the green arrow :  
+![alt text](https://user-images.githubusercontent.com/23243372/62821372-e9397200-bb73-11e9-8d74-2ddf034f351a.png "Run the test !")
 
 ## How to use Xdebug  
 ### VS CODE  
