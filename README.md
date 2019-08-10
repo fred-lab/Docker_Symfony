@@ -31,7 +31,9 @@ Inside the container, you can use **Composer** or **Symfony console** commands
 
 ## How to use NPM
 You must log into the **Build** container :  
-```docker-compose exec build sh```  
+```sh
+docker-compose exec build sh
+```  
 Inside the container, you can use **npm** or **node** commands  
 
 ## How to access to the database
@@ -80,6 +82,32 @@ MailDev allow to test your projects' emails during development
 If you use **SwiftMailer** with **Symfony**, in the **.env** file, replace the **Mailer_URL** with :  
 **MAILER_URL=smtp://maildev:25**  
 
+## How to use Xdebug  
+### VS CODE  
+
+#### Install extension
+First, you have to install **PHP Debug** by Felix Becker.  
+
+#### Edit configuration
+Once it's down, open **launch.json** and replace **port** by the value of **xdebug.remote_port** in **docker/engine/php.ini**  
+(9000 was already in use on my computer, so i use 10000 instead, but the default 9000's port is fine if it's free on your computer. Just match the value in **php.ini** and **launch.json**)
+
+```json
+{
+            "name": "Listen for XDebug",
+            "type": "php",
+            "request": "launch",
+            "port": 10000,
+            "log": true,
+            "pathMappings": {
+                "/home/docker": "${workspaceFolder}",
+              }
+        },
+```
+
+#### How to use Xdebug with VS Code
+- In your php's file, put some breakpoint 
+![alt text](https://user-images.githubusercontent.com/23243372/62820250-f2b9de80-bb61-11e9-87f3-04d204d60856.png "Left click on the left side to put a breakpoint")
 
 ## Annex
 ### Usefull command
