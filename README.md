@@ -106,8 +106,23 @@ Once it's down, open **launch.json** and replace **port** by the value of **xdeb
 ```
 
 #### How to use Xdebug with VS Code
-- In your php's file, put some breakpoint 
+- In your php's file, put some breakpoint :  
 ![alt text](https://user-images.githubusercontent.com/23243372/62820250-f2b9de80-bb61-11e9-87f3-04d204d60856.png "Left click on the left side to put a breakpoint")
+
+- Go to **Debug** : ![alt text](https://user-images.githubusercontent.com/23243372/62820288-7d024280-bb62-11e9-8bcc-972a6830fd3f.png "Debug menu")  
+
+- Start listenning for Xdebug : ![alt text](https://user-images.githubusercontent.com/23243372/62820309-b76bdf80-bb62-11e9-97d3-c75d51ceac87.png "Click on the green arrow")  
+You should see that at the bottom : ![alt text](https://user-images.githubusercontent.com/23243372/62820336-234e4800-bb63-11e9-973f-db7a330caaf9.png "Click on the green arrow")  
+
+
+- Go to your **web browser** and refresh the page
+
+- In **VS Code**, you should see now the **variables** :  
+![alt text](https://user-images.githubusercontent.com/23243372/62820359-8809a280-bb63-11e9-80fd-d1bf3c74cd35.png "Variables")  
+
+And a menu to navigate into your php's script :  
+![alt text](https://user-images.githubusercontent.com/23243372/62820371-c901b700-bb63-11e9-847b-09a59b1f6298.png "Menu")  
+
 
 ## Annex
 ### Usefull command
