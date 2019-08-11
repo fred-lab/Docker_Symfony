@@ -28,6 +28,9 @@ services:
     volumes:
       - .:/home/docker:rw
       - ./docker/engine/php.ini:/usr/local/etc/php/conf.d/custom.ini:ro
+    environment:
+      XDEBUG_CONFIG: "xdebug.idekey='xdebug'"
+      PHP_IDE_CONFIG: "serverName=xdebug"
     depends_on:
       - database
 
