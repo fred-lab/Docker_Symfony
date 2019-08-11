@@ -125,7 +125,8 @@ You can test if everything is ok by clicking on the refresh button:
 
 A PHP interpreter must be installed, because your IDE use it to run the tests.
 
-If you are using Symfony 4, you can install **PHPUnit Bridge** : 
+If you are using Symfony 4, you can install **PHPUnit Bridge** :  
+- Connect to your PHP container : ```docker-compose exec engine sh```
 - Install **PHPUnit Bridge** : ```composer require --dev symfony/phpunit-bridge```  
 - **Important** Configure **PHPUnit Bridge** : ```php bin/console```  
 
@@ -179,7 +180,7 @@ We gonna use them to parameter Intellij/PHPStorm.
 
 - Go to **Run -> Edit Configuration**, click on **+** and choose **PHP Remote Debug**  
 
-![alt text](hhttps://user-images.githubusercontent.com/23243372/62832510-e2703500-bc2f-11e9-963c-84ec614d1cfc.png "PHP Remote Debug")
+![alt text](https://user-images.githubusercontent.com/23243372/62832510-e2703500-bc2f-11e9-963c-84ec614d1cfc.png "PHP Remote Debug")
 
 Add a **name** and for **IDE key(session id)** you must indicate the same value as the env variable **XDEBUG_CONFIG: "xdebug.idekey='xdebug'"** so **xdebug** (if the value don't match, it won't work)  
 For **Server** click on **...** to add a new xdebug server.  
