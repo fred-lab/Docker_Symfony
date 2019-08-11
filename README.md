@@ -85,7 +85,7 @@ If you use **SwiftMailer** with **Symfony**, in the **.env** file, replace the *
 # Debug & Tests
 You can run **PHP Unit** test and use **Xdebug** with **Docker** on your IDE (**PHPStorm/Intellij/VSCode**)
 
-## Set Docker in PHPStorm/Intellij
+## PHPStorm/Intellij
 If you use **Intellij**, you have to install 2 plugins : **PHP Remote Interpreter** & **PHP Docker**
 
 ### Create a Docker instance
@@ -113,7 +113,8 @@ In **CLI Interpreter**, click on **+** to add a new configuration, and choose **
 
 ![alt text](https://user-images.githubusercontent.com/23243372/62820708-3adbff80-bb68-11e9-99ed-961863338993.png "From Docker, Vagrant,VM, Remote")  
 
-Check **Docker**. In **Image name**, the IDE should find automatically the PHP's container. If not, you can add it manually (chosse your current project) And click **ok**  
+Check **Docker**. In **Image name**, the IDE should find automatically the PHP's container. If not, you can add it manually (Your PHP container is something like *Your_Project*_**engine**)  
+And click **ok**  
 
 You can test if everything is ok by clicking on the refresh button:  
 ![alt text](https://user-images.githubusercontent.com/23243372/62821102-98c01580-bb6f-11e9-9112-d4624a70e4cc.png "PHP CLI Interpreter")
@@ -158,10 +159,57 @@ Choose a **name** and check **Defined in the configuration file**.
 
 #### Run the test  
 To run the test, choose your **Test runner** and click on the green arrow :  
-![alt text](https://user-images.githubusercontent.com/23243372/62821372-e9397200-bb73-11e9-8d74-2ddf034f351a.png "Run the test !")
+![alt text](https://user-images.githubusercontent.com/23243372/62821372-e9397200-bb73-11e9-8d74-2ddf034f351a.png "Run the test !")  
 
-## How to use Xdebug  
-### VS CODE  
+*Note* : there is a lazy way to run the test :  
+- Go to your PHP container : ```docker-compose exec engine sh```  
+- And run the test manually : ```php bin/phpunit```  
+![alt text](https://user-images.githubusercontent.com/23243372/62832726-6ed02700-bc33-11e9-9383-6ceb5232e49c.png "Run the test manually")  
+
+### Configure Xdebug  
+
+To  use Xdebug with Intellij/PHPStorm, we need to have 2 environments variables which are defined in **docker-compose.yml**:  
+
+```yaml
+environment:
+      XDEBUG_CONFIG: "xdebug.idekey='xdebug'"
+      PHP_IDE_CONFIG: "serverName=xdebug"
+```
+We gonna use them to parameter Intellij/PHPStorm.  
+
+- Go to **Run -> Edit Configuration**, click on **+** and choose **PHP Remote Debug**  
+
+![alt text](hhttps://user-images.githubusercontent.com/23243372/62832510-e2703500-bc2f-11e9-963c-84ec614d1cfc.png "PHP Remote Debug")
+
+Add a **name** and for **IDE key(session id)** you must indicate the same value as the env variable **XDEBUG_CONFIG: "xdebug.idekey='xdebug'"** so **xdebug** (if the value don't match, it won't work)  
+For **Server** click on **...** to add a new xdebug server.  
+
+Click on **+** to add a new configuration:  
+![alt text](https://user-images.githubusercontent.com/23243372/62832567-f2d4df80-bc30-11e9-9064-ddf97f1cce53.png "xDebug configuration")  
+
+**Name** must be equal to the value of the env variable **PHP_IDE_CONFIG: "serverName=xdebug"** so **xdebug** (if the value don't match, it won't work)  
+**Host** : I indicate my local ip (```hostname -i```) I think **localhost** should work fine.  
+Check **Use path mapping** and map your local root path of the project to the container root path (**/home/docker**)  
+Click **OK**  
+
+#### How to use Xdebug with Intellij/PHPStorm  
+- In a php file, put some breakpoint :  
+![alt text](https://user-images.githubusercontent.com/23243372/62832645-059be400-bc32-11e9-998a-ef49d2353cd1.png "Left click on the left side to put a breakpoint")  
+
+- In the top right menu, click to **start listenning for PHP debug connection**  
+![alt text](https://user-images.githubusercontent.com/23243372/62832662-4ac01600-bc32-11e9-91db-c5fadc9e9182.png "Start listenning for PHP debug connection")  
+
+- Go to your **web browser** and refresh the page  
+
+- In **Intellij/PHPStorm**, you should see now the **variables** :  
+![alt text](https://user-images.githubusercontent.com/23243372/62832678-88bd3a00-bc32-11e9-8cb8-c727d6d995cc.png "Variables")  
+
+And a menu to navigate into your php's script :  
+![alt text](https://user-images.githubusercontent.com/23243372/62832684-bb673280-bc32-11e9-9a75-795d4bb704e0.png "Menu")
+
+## VS CODE  
+
+### Configure Xdebug  
 
 #### Install extension
 First, you have to install **PHP Debug** by Felix Becker.  
