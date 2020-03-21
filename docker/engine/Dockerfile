@@ -4,8 +4,8 @@ LABEL maintainer="Fred Gauthier <fred.gauthier.dev@gmail.com>" \
     Description="A lightweigth PHP 7.4 container for Symfony with Xdebug and Composer, build with Alpine"
 
 # See https://xdebug.org/docs/compat to choose the correct version of Xdebug depending of the PHP version
-# See https://pecl.php.net/package/xdebug
-ARG PHP_XDEBUG_VERSION=2.9.3
+# See https://pecl.php.net/package/xdebug. Change this value in .env
+ARG PHP_XDEBUG_VERSION
 ARG HOST_USER
 ARG HOST_USERGROUP
 
