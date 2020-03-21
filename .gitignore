@@ -1,8 +1,6 @@
 
 \.idea/
 
-docker-compose.yml
-
 package\.json
 
 /docker/database/initdb.d/*
@@ -14,3 +12,5 @@ node_modules
 index\.php
 
 mix-manifest\.json
+
+.env
